@@ -1,13 +1,44 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from "vue";
-import App from "./App";
+import VueRouter from "vue-router";
 
-Vue.config.productionTip = false;
+import { routes } from "./routes";
+import { store } from "./stores/store";
+import { firebaseListener } from "./config/firebaseConfig";
 
-/* eslint-disable no-new */
+import App from "./App.vue";
+
+Vue.use(VueRouter);
+
+firebaseListener(authStatusChange);
+
+const router = new VueRouter({
+  mode: "history",
+  routes
+});
+
+// router.beforeEach((to, from, next) => {
+//     if (to.onlyGuest && store.getters.isLoggedIn) {
+//         next('/');
+//     } else {
+//         next();
+//     }
+// });
+
 new Vue({
   el: "#app",
-  components: { App },
-  template: "<App/>"
+  router,
+  store,
+  render: h => h(App)
 });
+
+function authStatusChange(loggedIn, user) {
+  if (store) {
+    store.commit("AUTH_STATUS_CHANGE");
+    if (user) {
+      store.dispatch("getShoppingCart", {
+        uid: user.uid,
+        currentCart: store.getters.cartItemList
+      });
+    }
+  }
+}
