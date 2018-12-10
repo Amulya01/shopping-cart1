@@ -3,7 +3,10 @@ import firebase from "firebase";
 const config = {
   apiKey: "AIzaSyCB7xeUEp_dp_ksaMRZj58OCO2vAs9dXvo",
   authDomain: "shopping-cart-be4d2.firebaseapp.com",
-  databaseURL: "https://shopping-cart-be4d2.firebaseio.com"
+  databaseURL: "https://shopping-cart-be4d2.firebaseio.com",
+  projectId: "shopping-cart-be4d2",
+  storageBucket: "shopping-cart-be4d2.appspot.com",
+  messagingSenderId: "724654594248"
 };
 
 firebase.initializeApp(config);

@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import { routes } from "./routes";
-import { store } from "./stores/store";
+import store from "./stores/store";
 import { firebaseListener } from "./config/firebaseConfig";
 
 import App from "./App.vue";
